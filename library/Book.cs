@@ -77,11 +77,11 @@ namespace BookLibrary
         public void PrintBookDetails()
         {
             Console.WriteLine($"ISBN: {ISBN}");
-            Console.WriteLine($"שם הספר: {BookTitle}");
-            Console.WriteLine($"שם המחבר: {AuthorName}");
-            Console.WriteLine($"שנת פרסום: {PublicationYear}");
-            Console.WriteLine($"קטגוריה: {Category}");
-            Console.WriteLine($"סטטוס השאלה: {(LoanStatus ? "מושאל" : "זמין")}");
+            Console.WriteLine($"name: {BookTitle}");
+            Console.WriteLine($"author: {AuthorName}");
+            Console.WriteLine($"year: {PublicationYear}");
+            Console.WriteLine($"category: {Category}");
+            Console.WriteLine($"status: {(LoanStatus ? "מושאל" : "זמין")}");
         }
     }
 
