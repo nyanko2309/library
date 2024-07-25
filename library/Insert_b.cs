@@ -13,9 +13,11 @@ namespace library
 {
     public partial class Insert_b : Form
     {
-        public Insert_b()
+        private main mainForm;
+        public Insert_b(main form)
         {
             InitializeComponent();
+            mainForm = form;
             for (int year = 1900; year <= 2023; year++)
             {
                 Yearlist.Items.Add(year);
@@ -34,8 +36,12 @@ namespace library
         {
             if (Yearlist.SelectedItem != null)
             {
+                int r;
                 int selectedYear = (int)Yearlist.SelectedItem;
-                int r = new Random().Next(1, 15000);
+                if (mainForm.currentBookISBN!= null)
+                    r =int.Parse(mainForm.currentBookISBN);
+                else
+                 r = new Random().Next(1, 15000);
                 Book n = new Book(r.ToString(), name.Text, author.Text, selectedYear, category.Text, checkBox1.Checked);
 
                 Dbcode.UpdateBook(n);

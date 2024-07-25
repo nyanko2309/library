@@ -2,28 +2,28 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace library
 {
     public partial class main : Form
     {
-
         private int currentPage = 0; // Current page index
-        private const int BooksPerPage = 1000; // Number of books to show per page
-        Insert_b f = new Insert_b();
-
+        private const int BooksPerPage = 500; // Number of books to show per page
+        public string currentBookISBN = null;
+        Insert_b f;
+        
         public main()
         {
             InitializeComponent();
-          
             Dbcode.AddAllBooks();
+            f = new Insert_b(this);
         }
 
         private void sort_Click(object sender, EventArgs e)
         {
-            // Sorting logic here (if needed)
+            Dbcode.Sort();
+            DisplayBooks(0);
         }
 
         private void Main_page_Click(object sender, EventArgs e)
@@ -41,9 +41,9 @@ namespace library
             f.Show();
         }
 
-
         private void view_Click(object sender, EventArgs e)
         {
+            currentPage = 0; // Reset to first page
             DisplayBooks(currentPage);
         }
 
@@ -57,20 +57,18 @@ namespace library
             int endIndex = Math.Min(startIndex + BooksPerPage, books.Count);
 
             int yPosition = 10; // Initial Y position for the first control
-            int bookCount = 0;
 
             // Create a button for each book
             for (int i = startIndex; i < endIndex; i++)
             {
                 Book book = books[i];
-                bookCount++;
 
                 Button bookButton = new Button
                 {
-                    Text = $"{book.BookTitle} by {book.AuthorName} ({book.PublicationYear})",
+                    Text = $"{i+1}-{book.BookTitle} by {book.AuthorName}- ({book.PublicationYear})",
                     Tag = book.ISBN, // Store the book's ISBN in the Tag property for later use
                     Location = new Point(10, yPosition),
-                    Size = new Size(300, 30)
+                    Size = new Size(500, 30)
                 };
 
                 bookButton.Click += BookButton_Click;
@@ -79,13 +77,15 @@ namespace library
                 yPosition += 40; // Move down for the next button
             }
 
-            // Create and add the "Next" button
-            if (endIndex < books.Count) // Check if there are more books to show
+            // Create and add the "Next" button if there are more books to display
+            if (endIndex < books.Count)
             {
+               
                 Button nextButton = new Button
                 {
                     Text = "Next",
-                    Location = new Point(20, yPosition),
+                    Location = new Point(400, yPosition),
+                    BackColor=Color.White,
                     Size = new Size(100, 30)
                 };
                 nextButton.Click += next_Click;
@@ -98,7 +98,6 @@ namespace library
             currentPage++;
             DisplayBooks(currentPage);
         }
-
 
         private void BookButton_Click(object sender, EventArgs e)
         {
@@ -116,7 +115,8 @@ namespace library
                 f.category.Text = selectedBook.Category;
                 f.checkBox1.Checked = selectedBook.LoanStatus;
                 f.checkBox1.Text = f.checkBox1.Checked ? "Taken" : "Available";
-
+                //isbn send
+                currentBookISBN = selectedBook.ISBN;
                 // Show the insert form in the panel
                 panel1.Controls.Clear();
                 f.TopLevel = false;
@@ -124,8 +124,6 @@ namespace library
                 f.Dock = DockStyle.Fill;
                 panel1.Controls.Add(f);
                 f.Show();
-
-            
             }
         }
     }

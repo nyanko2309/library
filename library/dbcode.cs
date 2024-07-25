@@ -1,4 +1,5 @@
-﻿using library;
+﻿using DocumentFormat.OpenXml.Office2010.ExcelAc;
+using library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,32 +70,124 @@ namespace BookLibrary
         }
 
         // Method to update a book's details
+       
         public static void UpdateBook(Book updatedBook)
         {
-            var existingBook = books.FirstOrDefault(b => b.ISBN == updatedBook.ISBN);
+            Book existingBook = null;
+
+            // Check if the book with the given ISBN exists in the list
+            foreach (var book in books)
+            {
+                if (book.ISBN == updatedBook.ISBN)
+                {
+                    existingBook = book;
+                    break;
+                }
+            }
+
+            // If the book exists, update its details
             if (existingBook != null)
             {
+                MessageBox.Show("Updating book: " + updatedBook.ISBN);
+
                 existingBook.BookTitle = updatedBook.BookTitle;
                 existingBook.AuthorName = updatedBook.AuthorName;
                 existingBook.PublicationYear = updatedBook.PublicationYear;
                 existingBook.Category = updatedBook.Category;
                 existingBook.LoanStatus = updatedBook.LoanStatus;
-               
             }
             else
-            { books.Add(updatedBook); }
-            
+            {
+                // If the book doesn't exist, add it to the list
+                books.Add(updatedBook);
+                MessageBox.Show("Added new book. Total books: " + books.Count);
+            }
         }
 
-    
 
 
-public static void Sort()
+
+        /*   public static void Sort()
+
+           {
+               DateTime startTime = DateTime.Now;
+               int n = books.Count;
+               for (int i = 0; i < n - 1; i++)
+               {
+                   for (int j = 0; j < n - i - 1; j++)
+                   {
+                       if (books[j].PublicationYear > books[j + 1].PublicationYear)
+                       {
+                           // Swap books[j] and books[j + 1]
+                           Book temp = books[j];
+                           books[j] = books[j + 1];
+                           books[j + 1] = temp;
+                       }
+                   }
+               }
+               DateTime endTime = DateTime.Now;
+
+               // Calculate the elapsed time
+               TimeSpan elapsed = endTime - startTime;
+
+               // Show elapsed time in a message box
+               MessageBox.Show($"Sorting completed in {elapsed.TotalMilliseconds} milliseconds.", "Sort Time", MessageBoxButtons.OK, MessageBoxIcon.Information);
+           }*/
+
+        public static void Sort()
         {
+            DateTime startTime = DateTime.Now;
+            QuickSort(books, 0, books.Count - 1);
+            DateTime endTime = DateTime.Now;
+
+            // Calculate the elapsed time
+            TimeSpan elapsed = endTime - startTime;
+
+            // Show elapsed time in a message box
+            MessageBox.Show($"Sorting completed in {elapsed.TotalMilliseconds} milliseconds.", "Sort Time", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
+        private static void QuickSort(List<Book> list, int low, int high)
+        {
+            if (low < high)
+            {
+                // Partition the list and get the pivot index
+                int pi = Partition(list, low, high);
+
+                // Recursively sort the sub-arrays
+                QuickSort(list, low, pi - 1);
+                QuickSort(list, pi + 1, high);
+            }
         }
 
+        private static int Partition(List<Book> list, int low, int high)
+        {
+            // Pivot (Element to be placed at the right position)
+            Book pivot = list[high];
+            int i = low - 1; // Index of smaller element
 
+            for (int j = low; j < high; j++)
+            {
+                // If current element is smaller than or equal to the pivot
+                if (list[j].PublicationYear <= pivot.PublicationYear)
+                {
+                    i++;
+                    // Swap elements at i and j
+                    Swap(list, i, j);
+                }
+            }
 
+            // Swap the pivot element with the element at i+1
+            Swap(list, i + 1, high);
+            return i + 1;
+        }
+
+        private static void Swap(List<Book> list, int i, int j)
+        {
+            Book temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+        }
 
     }
 }
