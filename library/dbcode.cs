@@ -3,6 +3,7 @@ using library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace BookLibrary
 {
@@ -25,7 +26,7 @@ namespace BookLibrary
                 for (int i = 0; i < booksToAdd; i++)
                 {
                     var book = new Book(
-                        isbn: random.Next(1, 15000).ToString(),
+                        isbn: random.Next(1, 15000),
                         bookTitle: Randoms.bookNames[random.Next(Randoms.bookNames.Length)],
                         authorName: Randoms.authors[random.Next(Randoms.authors.Length)],
                         publicationYear: random.Next(1900, 2024),
@@ -33,16 +34,27 @@ namespace BookLibrary
                         loanStatus: random.Next(2) == 0
                     );
 
+                    while (Newr(book.ISBN))
+                    {
+                        book.ISBN = random.Next(1, 15000);
+                    }
                     books.Add(book);
                 }
-               
-
-
             }
             else
             {
                 Console.WriteLine("The library already has 10,000 or more books.");
             }
+        }
+
+        public static bool Newr(int isbn)
+        {
+            foreach (var book in books)
+            {
+                if (book.ISBN == isbn)
+                    return true;
+            }
+            return false;
         }
 
         // Method to get all books as a List<Book>
@@ -52,13 +64,13 @@ namespace BookLibrary
         }
 
         // Method to get a book by ISBN
-        public static Book GetBookByISBN(string isbn)
+        public static Book GetBookByISBN(int isbn)
         {
             return books.FirstOrDefault(b => b.ISBN == isbn);
         }
 
         // Method to delete a book by ISBN
-        public static bool DeleteBookByISBN(string isbn)
+        public static bool DeleteBookByISBN(int isbn)
         {
             var bookToRemove = books.FirstOrDefault(b => b.ISBN == isbn);
             if (bookToRemove != null)
@@ -70,26 +82,15 @@ namespace BookLibrary
         }
 
         // Method to update a book's details
-       
         public static void UpdateBook(Book updatedBook)
         {
-            Book existingBook = null;
+            Book existingBook = books.FirstOrDefault(b => b.ISBN == updatedBook.ISBN);
 
-            // Check if the book with the given ISBN exists in the list
-            foreach (var book in books)
-            {
-                if (book.ISBN == updatedBook.ISBN)
-                {
-                    existingBook = book;
-                    break;
-                }
-            }
-
-            // If the book exists, update its details
             if (existingBook != null)
             {
                 MessageBox.Show("Updating book: " + updatedBook.ISBN);
 
+                // Update existing book details
                 existingBook.BookTitle = updatedBook.BookTitle;
                 existingBook.AuthorName = updatedBook.AuthorName;
                 existingBook.PublicationYear = updatedBook.PublicationYear;
@@ -104,36 +105,7 @@ namespace BookLibrary
             }
         }
 
-
-
-
-        /*   public static void Sort()
-
-           {
-               DateTime startTime = DateTime.Now;
-               int n = books.Count;
-               for (int i = 0; i < n - 1; i++)
-               {
-                   for (int j = 0; j < n - i - 1; j++)
-                   {
-                       if (books[j].PublicationYear > books[j + 1].PublicationYear)
-                       {
-                           // Swap books[j] and books[j + 1]
-                           Book temp = books[j];
-                           books[j] = books[j + 1];
-                           books[j + 1] = temp;
-                       }
-                   }
-               }
-               DateTime endTime = DateTime.Now;
-
-               // Calculate the elapsed time
-               TimeSpan elapsed = endTime - startTime;
-
-               // Show elapsed time in a message box
-               MessageBox.Show($"Sorting completed in {elapsed.TotalMilliseconds} milliseconds.", "Sort Time", MessageBoxButtons.OK, MessageBoxIcon.Information);
-           }*/
-
+        // Method to sort books by publication year
         public static void Sort()
         {
             DateTime startTime = DateTime.Now;
@@ -142,19 +114,14 @@ namespace BookLibrary
 
             // Calculate the elapsed time
             TimeSpan elapsed = endTime - startTime;
-
-            // Show elapsed time in a message box
             MessageBox.Show($"Sorting completed in {elapsed.TotalMilliseconds} milliseconds.", "Sort Time", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
         }
+
         private static void QuickSort(List<Book> list, int low, int high)
         {
             if (low < high)
             {
-                // Partition the list and get the pivot index
                 int pi = Partition(list, low, high);
-
-                // Recursively sort the sub-arrays
                 QuickSort(list, low, pi - 1);
                 QuickSort(list, pi + 1, high);
             }
@@ -162,22 +129,18 @@ namespace BookLibrary
 
         private static int Partition(List<Book> list, int low, int high)
         {
-            // Pivot (Element to be placed at the right position)
             Book pivot = list[high];
-            int i = low - 1; // Index of smaller element
+            int i = low - 1;
 
             for (int j = low; j < high; j++)
             {
-                // If current element is smaller than or equal to the pivot
                 if (list[j].PublicationYear <= pivot.PublicationYear)
                 {
                     i++;
-                    // Swap elements at i and j
                     Swap(list, i, j);
                 }
             }
 
-            // Swap the pivot element with the element at i+1
             Swap(list, i + 1, high);
             return i + 1;
         }
@@ -188,8 +151,5 @@ namespace BookLibrary
             list[i] = list[j];
             list[j] = temp;
         }
-
     }
 }
-
-      

@@ -10,14 +10,14 @@ namespace library
     {
         private int currentPage = 0; // Current page index
         private const int BooksPerPage = 500; // Number of books to show per page
-        public string currentBookISBN = null;
+        public int? currentBookISBN = null;
         Insert_b f;
-        
+
         public main()
         {
+            f = new Insert_b(this);
             InitializeComponent();
             Dbcode.AddAllBooks();
-            f = new Insert_b(this);
         }
 
         private void sort_Click(object sender, EventArgs e)
@@ -33,6 +33,10 @@ namespace library
 
         private void insert_Click(object sender, EventArgs e)
         {
+            currentBookISBN = null;
+
+            f = new Insert_b(this);
+            sort.Visible = false;
             panel1.Controls.Clear();
             f.TopLevel = false;
             f.FormBorderStyle = FormBorderStyle.None;
@@ -43,6 +47,7 @@ namespace library
 
         private void view_Click(object sender, EventArgs e)
         {
+            sort.Visible = true;
             currentPage = 0; // Reset to first page
             DisplayBooks(currentPage);
         }
@@ -65,7 +70,7 @@ namespace library
 
                 Button bookButton = new Button
                 {
-                    Text = $"{i+1}-{book.BookTitle} by {book.AuthorName}- ({book.PublicationYear})",
+                    Text = $"{i + 1} - {book.BookTitle} by {book.AuthorName} - ({book.PublicationYear})",
                     Tag = book.ISBN, // Store the book's ISBN in the Tag property for later use
                     Location = new Point(10, yPosition),
                     Size = new Size(500, 30)
@@ -80,17 +85,35 @@ namespace library
             // Create and add the "Next" button if there are more books to display
             if (endIndex < books.Count)
             {
-               
                 Button nextButton = new Button
                 {
                     Text = "Next",
                     Location = new Point(400, yPosition),
-                    BackColor=Color.White,
+                    BackColor = Color.White,
                     Size = new Size(100, 30)
                 };
                 nextButton.Click += next_Click;
                 panel1.Controls.Add(nextButton);
             }
+
+            if (pageIndex > 0)
+            {
+                Button prevButton = new Button
+                {
+                    Text = "Previous",
+                    Location = new Point(10, yPosition),
+                    BackColor = Color.White,
+                    Size = new Size(100, 30)
+                };
+                prevButton.Click += prev_Click;
+                panel1.Controls.Add(prevButton);
+            }
+        }
+
+        private void prev_Click(object sender, EventArgs e)
+        {
+            currentPage--;
+            DisplayBooks(currentPage);
         }
 
         private void next_Click(object sender, EventArgs e)
@@ -102,7 +125,7 @@ namespace library
         private void BookButton_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
-            string isbn = clickedButton.Tag as string;
+            int isbn = (int)clickedButton.Tag;
 
             Book selectedBook = Dbcode.GetBookByISBN(isbn);
 
@@ -115,7 +138,7 @@ namespace library
                 f.category.Text = selectedBook.Category;
                 f.checkBox1.Checked = selectedBook.LoanStatus;
                 f.checkBox1.Text = f.checkBox1.Checked ? "Taken" : "Available";
-                //isbn send
+                // ISBN send
                 currentBookISBN = selectedBook.ISBN;
                 // Show the insert form in the panel
                 panel1.Controls.Clear();

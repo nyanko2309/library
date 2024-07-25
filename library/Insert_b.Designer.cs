@@ -43,75 +43,81 @@
             // 
             // name
             // 
-            name.Location = new Point(131, 53);
+            name.Cursor = Cursors.IBeam;
+            name.Location = new Point(159, 53);
             name.Name = "name";
             name.Size = new Size(287, 31);
             name.TabIndex = 1;
             // 
             // author
             // 
-            author.Location = new Point(131, 114);
+            author.Location = new Point(159, 121);
             author.Name = "author";
             author.Size = new Size(287, 31);
             author.TabIndex = 2;
             // 
             // category
             // 
-            category.Location = new Point(131, 243);
+            category.Location = new Point(159, 243);
             category.Name = "category";
             category.Size = new Size(287, 31);
             category.TabIndex = 4;
-            category.TextChanged += category_TextChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
+            label2.Font = new Font("Calibri", 11F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label2.Location = new Point(26, 53);
             label2.Name = "label2";
-            label2.Size = new Size(62, 25);
+            label2.Size = new Size(69, 27);
             label2.TabIndex = 6;
             label2.Text = "NAME";
             // 
             // label3
             // 
             label3.AutoSize = true;
+            label3.Font = new Font("Calibri", 11F, FontStyle.Italic);
             label3.Location = new Point(26, 117);
             label3.Name = "label3";
-            label3.Size = new Size(83, 25);
+            label3.Size = new Size(89, 27);
             label3.TabIndex = 7;
             label3.Text = "AUTHOR";
+            label3.Click += label3_Click;
             // 
             // label4
             // 
             label4.AutoSize = true;
+            label4.Font = new Font("Calibri", 11F, FontStyle.Italic);
             label4.Location = new Point(26, 185);
             label4.Name = "label4";
-            label4.Size = new Size(54, 25);
+            label4.Size = new Size(59, 27);
             label4.TabIndex = 8;
             label4.Text = "YEAR";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(26, 249);
+            label5.Font = new Font("Calibri", 11F, FontStyle.Italic);
+            label5.Location = new Point(12, 243);
             label5.Name = "label5";
-            label5.Size = new Size(99, 25);
+            label5.Size = new Size(108, 27);
             label5.TabIndex = 9;
             label5.Text = "CATEGORY";
             // 
             // label6
             // 
             label6.AutoSize = true;
+            label6.Font = new Font("Calibri", 11F, FontStyle.Italic);
             label6.Location = new Point(26, 309);
             label6.Name = "label6";
-            label6.Size = new Size(72, 25);
+            label6.Size = new Size(77, 27);
             label6.TabIndex = 11;
             label6.Text = "STATUS";
             // 
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(131, 308);
+            checkBox1.Location = new Point(159, 309);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(97, 29);
             checkBox1.TabIndex = 12;
@@ -121,7 +127,8 @@
             // 
             // button1
             // 
-            button1.Location = new Point(131, 366);
+            button1.Font = new Font("Calibri", 11F, FontStyle.Italic);
+            button1.Location = new Point(159, 365);
             button1.Name = "button1";
             button1.Size = new Size(112, 34);
             button1.TabIndex = 13;
@@ -131,9 +138,10 @@
             // 
             // Yearlist
             // 
+            Yearlist.AllowDrop = true;
             Yearlist.FormattingEnabled = true;
             Yearlist.ItemHeight = 25;
-            Yearlist.Location = new Point(131, 185);
+            Yearlist.Location = new Point(159, 181);
             Yearlist.Name = "Yearlist";
             Yearlist.Size = new Size(180, 29);
             Yearlist.TabIndex = 14;
@@ -142,6 +150,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.BurlyWood;
             ClientSize = new Size(800, 450);
             Controls.Add(Yearlist);
             Controls.Add(button1);

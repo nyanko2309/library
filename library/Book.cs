@@ -11,14 +11,14 @@ namespace BookLibrary
 {
     public class Book
     {
-        private string isbn;
+        private int isbn;
         private string bookTitle;
         private string authorName;
         private int publicationYear;
         private string category;
         private bool loanStatus;
 
-        public string ISBN
+        public int ISBN
         {
             get { return isbn; }
             set { isbn = value; }
@@ -64,7 +64,7 @@ namespace BookLibrary
             set { loanStatus = value; }
         }
 
-        public Book(string isbn, string bookTitle, string authorName, int publicationYear, string category, bool loanStatus)
+        public Book(int isbn, string bookTitle, string authorName, int publicationYear, string category, bool loanStatus)
         {
             ISBN = isbn;
             BookTitle = bookTitle;

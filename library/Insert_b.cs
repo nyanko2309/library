@@ -1,12 +1,8 @@
 ﻿using BookLibrary;
+using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace library
@@ -29,35 +25,39 @@ namespace library
             if (checkBox1.Checked)
                 checkBox1.Text = "taken";
             else
-                checkBox1.Text = "avilable";
+                checkBox1.Text = "available";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Yearlist.SelectedItem != null)
+            if (Yearlist.SelectedItem != null && !string.IsNullOrEmpty(name.Text))
             {
                 int r;
                 int selectedYear = (int)Yearlist.SelectedItem;
-                if (mainForm.currentBookISBN!= null)
-                    r =int.Parse(mainForm.currentBookISBN);
+                if (mainForm.currentBookISBN != null)
+                    r = (int)mainForm.currentBookISBN;
                 else
-                 r = new Random().Next(1, 15000);
-                Book n = new Book(r.ToString(), name.Text, author.Text, selectedYear, category.Text, checkBox1.Checked);
+                {
+                    r = new Random().Next(1, 15000);
+                    while (Dbcode.Newr(r)) r = new Random().Next(1, 15000);
+                }
+
+                Book n = new Book(r, name.Text, author.Text, selectedYear, category.Text, checkBox1.Checked);
 
                 Dbcode.UpdateBook(n);
-                MessageBox.Show(name.Text + author.Text + selectedYear + category.Text + checkBox1.Checked);
+
+                // Hide the form instead of closing it
+                this.Hide();
+
 
             }
-
-
-
             else
             {
-                MessageBox.Show("Please select a year.");
+                MessageBox.Show(Yearlist.SelectedItem == null ? "Please select a year." : "Please select a book name.");
             }
         }
 
-        private void category_TextChanged(object sender, EventArgs e)
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }

@@ -33,57 +33,68 @@ namespace library
         /// </summary>
         private void InitializeComponent()
         {
-            Button sort;
+            sort = new Button();
             view = new Button();
             insert = new Button();
             panel1 = new Panel();
-            sort = new Button();
+            
             SuspendLayout();
             // 
             // sort
             // 
+            sort.BackColor = SystemColors.WindowText;
+            sort.BackgroundImage = Properties.Resources.dark_wood_background_1920_x_1080_wdj1vph19bm5vqaj;
             sort.BackgroundImageLayout = ImageLayout.Zoom;
             sort.FlatAppearance.BorderSize = 0;
-            sort.FlatStyle = FlatStyle.Flat;
-            sort.Font = new Font("Alef", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            sort.Location = new Point(12, 62);
+            sort.FlatStyle = FlatStyle.Popup;
+            sort.Font = new Font("Calibri", 20F, FontStyle.Italic);
+            sort.ForeColor = Color.Wheat;
+            sort.Location = new Point(12, 247);
             sort.Name = "sort";
             sort.Size = new Size(139, 55);
             sort.TabIndex = 3;
             sort.Text = "sort";
-            sort.UseVisualStyleBackColor = true;
+            sort.UseVisualStyleBackColor = false;
+            sort.Visible = false;
             sort.Click += sort_Click;
             // 
             // view
             // 
+            view.BackColor = SystemColors.WindowText;
+            view.BackgroundImage = Properties.Resources.dark_wood_background_1920_x_1080_wdj1vph19bm5vqaj;
             view.BackgroundImageLayout = ImageLayout.Zoom;
             view.FlatAppearance.BorderSize = 0;
-            view.FlatStyle = FlatStyle.Flat;
-            view.Font = new Font("Alef", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            view.Location = new Point(12, 251);
+            view.FlatStyle = FlatStyle.Popup;
+            view.Font = new Font("Calibri", 20F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            view.ForeColor = Color.Wheat;
+            view.Location = new Point(12, 67);
             view.Name = "view";
             view.Size = new Size(139, 55);
             view.TabIndex = 2;
-            view.Text = "view books";
-            view.UseVisualStyleBackColor = true;
+            view.Text = "view ";
+            view.UseVisualStyleBackColor = false;
             view.Click += view_Click;
             // 
             // insert
             // 
+            insert.BackColor = SystemColors.WindowText;
+            insert.BackgroundImage = Properties.Resources.dark_wood_background_1920_x_1080_wdj1vph19bm5vqaj;
             insert.BackgroundImageLayout = ImageLayout.Zoom;
             insert.FlatAppearance.BorderSize = 0;
-            insert.FlatStyle = FlatStyle.Flat;
-            insert.Font = new Font("Alef", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            insert.Location = new Point(12, 151);
+            insert.FlatStyle = FlatStyle.Popup;
+            insert.Font = new Font("Calibri", 20F, FontStyle.Italic);
+            insert.ForeColor = Color.Wheat;
+            insert.Location = new Point(12, 157);
             insert.Name = "insert";
             insert.Size = new Size(139, 55);
             insert.TabIndex = 4;
             insert.Text = "insert book";
-            insert.UseVisualStyleBackColor = true;
+            insert.UseVisualStyleBackColor = false;
             insert.Click += insert_Click;
             // 
             // panel1
             // 
+            panel1.BackColor = Color.BurlyWood;
             panel1.Location = new Point(171, 23);
             panel1.Name = "panel1";
             panel1.Size = new Size(601, 398);
@@ -94,6 +105,7 @@ namespace library
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Coral;
+            BackgroundImage = Properties.Resources.dark_wood_background_1920_x_1080_wdj1vph19bm5vqaj;
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(800, 450);
             Controls.Add(panel1);
