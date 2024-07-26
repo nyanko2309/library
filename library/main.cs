@@ -73,7 +73,7 @@ namespace library
                     Text = $"{i + 1} - {book.BookTitle} by {book.AuthorName} - ({book.PublicationYear})",
                     Tag = book.ISBN, // Store the book's ISBN in the Tag property for later use
                     Location = new Point(10, yPosition),
-                    Size = new Size(500, 30)
+                    Size = new Size(400, 30)
                 };
 
                 bookButton.Click += BookButton_Click;
@@ -100,7 +100,7 @@ namespace library
             {
                 Button prevButton = new Button
                 {
-                    Text = "Previous",
+                    Text = "Back",
                     Location = new Point(10, yPosition),
                     BackColor = Color.White,
                     Size = new Size(100, 30)
@@ -108,7 +108,27 @@ namespace library
                 prevButton.Click += prev_Click;
                 panel1.Controls.Add(prevButton);
             }
+
+            Label l1 = new Label
+            {
+                Text = "Average year:"+Dbcode.m(),
+                Location = new Point(430, 0),
+                BackColor = Color.White,
+                Size = new Size(300, 30)
+            };
+
+            Label l2 = new Label
+            {
+                Text = "avilable books:" + Dbcode.count(),
+                Location = new Point(430, 30),
+                BackColor = Color.White,
+                Size = new Size(300, 30)
+            };
+            panel1.Controls.Add(l1);
+            panel1.Controls.Add(l2);
+
         }
+    
 
         private void prev_Click(object sender, EventArgs e)
         {

@@ -33,11 +33,11 @@ namespace library
         /// </summary>
         private void InitializeComponent()
         {
-            sort = new Button();
+            
             view = new Button();
             insert = new Button();
             panel1 = new Panel();
-            
+            sort = new Button();
             SuspendLayout();
             // 
             // sort
@@ -51,7 +51,7 @@ namespace library
             sort.ForeColor = Color.Wheat;
             sort.Location = new Point(12, 247);
             sort.Name = "sort";
-            sort.Size = new Size(139, 55);
+            sort.Size = new Size(122, 55);
             sort.TabIndex = 3;
             sort.Text = "sort";
             sort.UseVisualStyleBackColor = false;
@@ -69,7 +69,7 @@ namespace library
             view.ForeColor = Color.Wheat;
             view.Location = new Point(12, 67);
             view.Name = "view";
-            view.Size = new Size(139, 55);
+            view.Size = new Size(122, 55);
             view.TabIndex = 2;
             view.Text = "view ";
             view.UseVisualStyleBackColor = false;
@@ -86,7 +86,7 @@ namespace library
             insert.ForeColor = Color.Wheat;
             insert.Location = new Point(12, 157);
             insert.Name = "insert";
-            insert.Size = new Size(139, 55);
+            insert.Size = new Size(122, 55);
             insert.TabIndex = 4;
             insert.Text = "insert book";
             insert.UseVisualStyleBackColor = false;
@@ -95,9 +95,9 @@ namespace library
             // panel1
             // 
             panel1.BackColor = Color.BurlyWood;
-            panel1.Location = new Point(171, 23);
+            panel1.Location = new Point(140, 23);
             panel1.Name = "panel1";
-            panel1.Size = new Size(601, 398);
+            panel1.Size = new Size(648, 398);
             panel1.TabIndex = 7;
             // 
             // main

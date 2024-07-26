@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Office2010.ExcelAc;
+using DocumentFormat.OpenXml.Wordprocessing;
 using library;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,8 @@ namespace BookLibrary
     {
         // Create a list to hold the books
         private static List<Book> books = new List<Book>();
-
+       
+        
         // Method to add books to the list
         public static void AddAllBooks()
         {
@@ -151,5 +153,25 @@ namespace BookLibrary
             list[i] = list[j];
             list[j] = temp;
         }
+
+        public static int m()
+        {  int sum = 0;
+            foreach (var book in books)
+            {
+                sum += book.PublicationYear;
+            }
+            return sum / books.Count;
+         }
+
+        public static int count()
+        { int sum = 0;
+            foreach (var book in books)
+            {
+                if(book.LoanStatus==false)sum++;
+            }
+            return sum; 
+        }
+
+    
     }
 }
