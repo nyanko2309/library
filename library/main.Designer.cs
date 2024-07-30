@@ -97,7 +97,7 @@ namespace library
             panel1.BackColor = Color.BurlyWood;
             panel1.Location = new Point(140, 23);
             panel1.Name = "panel1";
-            panel1.Size = new Size(648, 398);
+            panel1.Size = new Size(800, 550);
             panel1.TabIndex = 7;
             // 
             // main
@@ -107,7 +107,7 @@ namespace library
             BackColor = Color.Coral;
             BackgroundImage = Properties.Resources.dark_wood_background_1920_x_1080_wdj1vph19bm5vqaj;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1000, 600);
             Controls.Add(panel1);
             Controls.Add(insert);
             Controls.Add(sort);

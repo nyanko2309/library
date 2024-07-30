@@ -119,7 +119,24 @@ namespace BookLibrary
             MessageBox.Show($"Sorting completed in {elapsed.TotalMilliseconds} milliseconds.", "Sort Time", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private static void QuickSort(List<Book> list, int low, int high)
+        // Bubble Sort Implementation
+        /*
+        public static void BubbleSort(List<Book> list)
+        {
+            int n = list.Count;
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int j = 0; j < n - i - 1; j++)
+                {
+                    if (list[j].PublicationYear > list[j + 1].PublicationYear)
+                    {
+                        Swap(list, j, j + 1);
+                    }
+                }
+            }
+        }
+        */
+        public static void QuickSort(List<Book> list, int low, int high)
         {
             if (low < high)
             {

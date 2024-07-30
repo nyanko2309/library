@@ -30,8 +30,14 @@ namespace library
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Yearlist.SelectedItem != null && !string.IsNullOrEmpty(name.Text))
+            if (Yearlist.SelectedItem != null && !string.IsNullOrEmpty(name.Text) && !string.IsNullOrEmpty(author.Text) && !string.IsNullOrEmpty(category.Text))
             {
+                if (int.TryParse(name.Text, out _) || int.TryParse(author.Text, out _) || int.TryParse(category.Text, out _))
+                {
+                    MessageBox.Show("Please enter valid (not numbered) credentials.");
+                    return;
+                }
+
                 int r;
                 int selectedYear = (int)Yearlist.SelectedItem;
                 if (mainForm.currentBookISBN != null)
@@ -53,10 +59,10 @@ namespace library
             }
             else
             {
-                MessageBox.Show(Yearlist.SelectedItem == null ? "Please select a year." : "Please select a book name.");
+                MessageBox.Show(Yearlist.SelectedItem == null ? "Please fill all the fields." : "Please select a book name.");
             }
         }
 
-        
+
     }
 }
